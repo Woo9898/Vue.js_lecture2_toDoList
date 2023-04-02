@@ -22,10 +22,8 @@ export default {
 
             if(this.newToDo !== ''){
             //저장로직
-            var obj = {completed: false, item: this.newToDo}; //완료 상태를 표시하기 위해 JSON형태로 객체 생성
-            localStorage.setItem(this.newToDo, JSON.stringify(obj)); //localstorage 사용
+            this.$emit('addToDoItem', this.newToDo)//addToDoItem 이라는 이벤트를 발생시키면서 상위 컴포넌트로 , 뒤에 인자를 넘김
             this.clearInput();
-            this.reload();
             }else{
                 alert("write to register ToDo");
             }
@@ -33,10 +31,8 @@ export default {
         "clearInput": function(){
             //초기화 로직
             this.newToDo= ''; 
-        },
-        "reload": function(){
-            window.location.reload();
         }
+
     }
 
 }

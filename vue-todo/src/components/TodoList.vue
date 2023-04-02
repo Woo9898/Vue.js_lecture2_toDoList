@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul><!--ul>li*3 하면 자동으로 생성됨-->
-      <li v-for="(todoItem, index) in todoItems" v-bind:key="todoItem.item" class="shadow"><!--v-for의 내장 index-->
+      <li v-for="(todoItem, index) in propsdata" v-bind:key="todoItem.item" class="shadow"><!--v-for의 내장 index-->
       <svg v-on:click="toggleCompleted(todoItem, index)" v-bind:class="{checkBtnCompleted: todoItem.completed}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M470.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L192 338.7 425.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>
         <!-- v-bind로 todoItem.completed에 따라 class 부여되도록 -->
         <span v-bind:class="{textCompledted: todoItem.completed}">{{todoItem.item}}</span> 
@@ -17,34 +17,13 @@
 
 <script>
 export default {
-
-  data: function(){
-    return{
-      todoItems: []
-    }
-  },
-
-  created: function(){ //뷰 라이프 사이클(생성, 마운트, 업데이트, 디스트로이드 등) // created는 hook, 즉 생성되는 시점에 실행되는 것
-    if(localStorage.length > 0){
-      for(var i= 0; i < localStorage.length; i++){
-        // this.todoItems.push(localStorage.key(i));
-        this.todoItems.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
-
-      }
-    }
-  },
-  
+  props:['propsdata'],
   methods: {
     removeTodo: function(todoItem, index){
-      localStorage.removeItem(todoItem);
-      this.todoItems.splice(index, 1);//splice() 특정 인덱스에서부터 특정 개수를 지울 수 있다.
+      this.$emit('doRemove', todoItem, index)
     },
     toggleCompleted: function(todoItem, index){
-      console.log(todoItem, index);
-      todoItem.completed = !todoItem.completed;
-      //로컬스토리지 데이터 갱신
-      localStorage.removeItem(todoItem.item);
-      localStorage.setItem(todoItem.item, JSON.stringify(todoItem))
+      this.$emit('doCompleted', todoItem, index)
     }
   }
 }

@@ -8,17 +8,7 @@
 export default {
   methods:{
     clearAllDB: function() {
-
-       if (confirm("정말 삭제하시겠습니까??") == true){    //확인
-
-        localStorage.clear();
-        window.location.reload();
-
-      }else{   //취소
-
-        alert("삭제가 취소되었습니다.")
-
-      }
+      this.$emit('clearTodo')
     }
   }
 }
