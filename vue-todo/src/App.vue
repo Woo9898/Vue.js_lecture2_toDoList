@@ -14,23 +14,12 @@ import TodoFooter from './components/TodoFooter';
 import TodoInput from './components/TodoInput';
 
 export default {
-  data(){
-      return {
-        todoItems: []
-      }
-  },
   components:{
-    // 'TodoHeader': TodoHeader,
-    // 'TodoList': TodoList,
-    // 'TodoFooter': TodoFooter,
-    // 'TodoInput': TodoInput
-    TodoHeader,
-    TodoList,
-    TodoFooter,
-    TodoInput
-    
+    TodoHeader, // 'TodoHeader': TodoHeader,
+    TodoList,// 'TodoList': TodoList,
+    TodoFooter,// 'TodoFooter': TodoFooter,
+    TodoInput// 'TodoInput': TodoInput
   }
-
 }
 </script>
 
